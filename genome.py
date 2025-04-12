@@ -139,7 +139,7 @@ class Genome():
 
     @staticmethod
     def shrink_mutate(genome, rate):
-      if len(genome) <= 1 or random.random() >= rate:
+        if len(genome) <= 1 or random.random() >= rate:
             return np.copy(genome)  # No shrink if genome is minimal or mutation fails
         
         num_to_remove = max(1, int(rate * len(genome)))  # Remove proportional to rate
