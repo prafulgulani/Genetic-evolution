@@ -113,13 +113,6 @@ class Genome():
 
     @staticmethod
     def crossover(g1, g2):
-        # x1 = random.randint(0, len(g1)-1)
-        # x2 = random.randint(0, len(g2)-1)
-        # g3 = np.concatenate((g1[x1:], g2[x2:])) 
-        # if len(g3) > len(g1):
-        #     g3 = g3[0:len(g1)] 
-        # return g3
-
         if len(g1) < 2 or len(g2) < 2:
             return np.copy(g1)  # Avoid issues with very short genomes
         
