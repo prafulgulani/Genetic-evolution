@@ -116,6 +116,10 @@ class Genome():
         if len(g1) < 2 or len(g2) < 2:
             return np.copy(g1)  # Avoid issues with very short genomes
         
+        # Ensure g1 and g2 are 1D arrays
+        g1 = np.squeeze(g1)
+        g2 = np.squeeze(g2)
+        
         x1, x2 = sorted(random.sample(range(len(g1)), 2))
         new_genome = np.concatenate((g1[:x1], g2[x1:x2], g1[x2:]))
         

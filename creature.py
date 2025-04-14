@@ -125,7 +125,7 @@ class Creature:
         height_gain = max(0, last_pos[2] - start_pos[2])  # Height climbed
 
         # Apply power function for progressive reward
-        distance_reward = xy_travel**2  # Squared reward to strongly favor larger distances
+        distance_reward = xy_travel**1.5  # Squared reward to strongly favor larger distances
         height_reward = height_gain**2  
 
         # Penalize unnatural movement (too much height vs. distance)
@@ -134,7 +134,7 @@ class Creature:
 
         # Reward for moving toward mountain center
         dist_to_center = np.linalg.norm(last_pos[:2])  # Distance from (0,0)
-        center_reward = 1.0 / (dist_to_center + 1)
+        center_reward = (1.0 / (dist_to_center + 1)) * 1.5
 
         # Link efficiency penalty
         link_count = len(self.get_expanded_links())
@@ -142,7 +142,9 @@ class Creature:
         link_reward = 0.1 * link_count
 
         # Compute final fitness
-        fitness = (distance_reward + height_reward) * movement_penalty + center_reward + link_reward - link_penalty
+        # fitness = (distance_reward + height_reward) * movement_penalty + center_reward + link_reward - link_penalty
+        fitness = distance_reward + center_reward + link_reward - link_penalty
+
         return max(0, fitness)  # Ensure fitness is non-negative
 
     def update_dna(self, dna):
